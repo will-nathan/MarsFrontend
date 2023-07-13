@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
@@ -16,7 +16,6 @@ const getter = async (rover_name : string | null) => {
     console.log(output.data)
     return(output.data)
   } catch (error) {
-      //redirect if an incorrect link is used
       console.log(error)
   }
 }
@@ -24,13 +23,16 @@ const getter = async (rover_name : string | null) => {
 const Form = () => {
  const  [image_list,setImageList]=useState(null);
  const [rover_name, setRoverName]:[string | null, any]=useState(null)
-
+ const [image_status, setImageStatus]:[string,any]=useState('select a name to add an image')
 
   useEffect(()=> {
     (async() =>{
     if (rover_name){
+    setImageStatus(`Loading ${rover_name}`)
     let result = await getter(rover_name);
-    setImageList(result);}
+    setImageList(result);
+    setImageStatus(`got the photos from ${rover_name}`)
+  }
     })();
   },[rover_name])
 
@@ -46,7 +48,7 @@ const Form = () => {
       <Select onChange={(choice) => setRoverName(choice ? choice.value:null)} options={options} />
     </div>
     <div>
-      <p>{image_list ? `Here is the most recent image from ${rover_name}` : 'Loading Images...'}</p>
+      <p>{image_status}</p>
     
       {outputImageList(image_list)}
     </div>
