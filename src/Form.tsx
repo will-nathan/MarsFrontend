@@ -17,7 +17,7 @@ const Form = ({onChange}:Props) => {
     
   return (
     <>
-    <div style={{backgroundColor:'#f31'}}>
+    <div>
       <Select onChange={onChange} options={options} />
     </div>
     </>
