@@ -17,7 +17,7 @@
     overflow:hidden;
     display: flex;
     border-radius: 30px;
-    box-shadow: 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px rgba(0,0,0, 0.5);
     border: 5px solid #333337;
   }
   
